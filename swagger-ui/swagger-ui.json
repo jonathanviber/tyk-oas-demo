@@ -1,0 +1,25 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tyk Demo APIs",
+    "version": "1.0.0",
+    "description": "Complete API documentation for Tyk OAS Demo"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Tyk Gateway"
+    }
+  ],
+  "tags": [
+    {
+      "name": "HTTPBin APIs",
+      "description": "HTTPBin testing endpoints"
+    },
+    {
+      "name": "Echo APIs",
+      "description": "Echo server endpoints"
+    }
+  ],
+  "paths": {}
+}

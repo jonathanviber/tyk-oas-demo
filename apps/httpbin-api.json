@@ -5,95 +5,21 @@
     "version": "1.0.0",
     "description": "HTTPBin testing endpoints"
   },
-  "servers": [
-    {
-      "url": "http://localhost:8080"
-    }
-  ],
-  "components": {
-    "parameters": {
-      "RequestId": {
-        "name": "request-id",
-        "in": "header",
-        "required": false,
-        "schema": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "description": "Optional request ID that will be returned in the response"
-      }
-    },
-    "securitySchemes": {
-      "JWTAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "description": "JWT token with role 'user' and scope 'api:*'"
-      }
-    },
-    "responses": {
-      "Success": {
-        "description": "Successful response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      },
-      "BadRequest": {
-        "description": "Bad request",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "ServerError": {
-        "description": "Internal server error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "HTTPBin APIs",
-      "description": "HTTPBin testing endpoints"
-    }
-  ],
   "paths": {
     "/get": {
       "get": {
+        "operationId": "httpbinGet",
         "tags": ["HTTPBin APIs"],
         "summary": "HTTPBin GET request",
         "description": "Returns request details including headers and query parameters",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RequestId"
+            "$ref": "./common-components.json#/components/parameters/RequestId"
           }
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Success",
+            "$ref": "./common-components.json#/components/responses/200",
             "content": {
               "application/json": {
                 "example": {
@@ -109,27 +35,28 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/BadRequest"
+            "$ref": "./common-components.json#/components/responses/400"
           },
           "500": {
-            "$ref": "#/components/responses/ServerError"
+            "$ref": "./common-components.json#/components/responses/500"
           }
         }
       }
     },
     "/uuid": {
       "get": {
+        "operationId": "generateUuid",
         "tags": ["HTTPBin APIs"],
         "summary": "Generate UUID",
         "description": "Returns a randomly generated UUID",
         "parameters": [
           {
-            "$ref": "#/components/parameters/RequestId"
+            "$ref": "./common-components.json#/components/parameters/RequestId"
           }
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Success",
+            "$ref": "./common-components.json#/components/responses/200",
             "content": {
               "application/json": {
                 "example": {
@@ -139,7 +66,7 @@
             }
           },
           "500": {
-            "$ref": "#/components/responses/ServerError"
+            "$ref": "./common-components.json#/components/responses/500"
           }
         }
       }

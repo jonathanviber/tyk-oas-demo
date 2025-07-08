@@ -1,0 +1,71 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Common Components",
+    "version": "1.0.0"
+  },
+  "components": {
+    "parameters": {
+      "RequestId": {
+        "name": "request-id",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "Optional request ID that will be returned in the response"
+      }
+    },
+    "securitySchemes": {
+      "JWTAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT token with role 'user' and scope 'api:*'"
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
