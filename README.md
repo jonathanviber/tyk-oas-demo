@@ -14,6 +14,8 @@ This demo showcases a typical production Tyk setup with:
 - **Circuit breaker** all endpoints should implement a circuit breaker
 - **Caching** Most GET endpoints should cache in REDIS
 - **Rate Limiting** Some endpoints should use rate limiting with REDIS as the storage.
+- **JWT Auth** Authenticating a JWT by using a JWKS 
+- **Request Validation** validating of headers, query strings, payload etc. based on the OAS schema
 - **HTTP/2** Requests form the client to TYK and requests from TYK to the upstream should be HTTP/2
 
 
@@ -55,4 +57,9 @@ docker compose up
 - **Caching**
 - **Rate limiting**
 - **Circuit breaker**
-- **Logging** 
+- **Logging**
+- **Performance Optimizations**
+- **Payload validation**
+- **CORS settings**
+- **JWT Authentication**
+- **Request Validation**
