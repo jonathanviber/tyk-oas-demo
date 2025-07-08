@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Demo API",
+    "title": "Echo API",
     "version": "1.0.0",
-    "description": "Demo API with HTTPBin and Echo endpoints"
+    "description": "Echo server endpoints"
   },
   "servers": [
     {
@@ -21,14 +21,6 @@
           "format": "uuid"
         },
         "description": "Optional request ID that will be returned in the response"
-      }
-    },
-    "securitySchemes": {
-      "JWTAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "description": "JWT token with role 'user' and scope 'api:*'"
       }
     },
     "responses": {
@@ -76,79 +68,12 @@
   },
   "tags": [
     {
-      "name": "HTTPBin APIs",
-      "description": "HTTPBin testing endpoints"
-    },
-    {
       "name": "Echo APIs",
       "description": "Echo server endpoints"
     }
   ],
   "paths": {
-    "/get": {
-      "get": {
-        "tags": ["HTTPBin APIs"],
-        "summary": "HTTPBin GET request",
-        "description": "Returns request details including headers and query parameters",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/RequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Success",
-            "content": {
-              "application/json": {
-                "example": {
-                  "args": {},
-                  "headers": {
-                    "Host": "httpbin.org",
-                    "User-Agent": "curl/7.68.0"
-                  },
-                  "origin": "127.0.0.1",
-                  "url": "http://httpbin.org/get"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "500": {
-            "$ref": "#/components/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/uuid": {
-      "get": {
-        "tags": ["HTTPBin APIs"],
-        "summary": "Generate UUID",
-        "description": "Returns a randomly generated UUID",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/RequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Success",
-            "content": {
-              "application/json": {
-                "example": {
-                  "uuid": "efa634ed-e0c3-4e16-9e5a-159c327ce0d0"
-                }
-              }
-            }
-          },
-          "500": {
-            "$ref": "#/components/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/echo": {
+    "/": {
       "get": {
         "tags": ["Echo APIs"],
         "summary": "Echo GET request",
@@ -280,11 +205,11 @@
   },
   "x-tyk-api-gateway": {
     "info": {
-      "name": "Demo API",
-      "id": "demo-api"
+      "name": "Echo API",
+      "id": "echo-api"
     },
     "upstream": {
-      "url": "http://httpbin"
+      "url": "http://echo"
     },
     "server": {
       "listenPath": {

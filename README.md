@@ -8,9 +8,14 @@ A production-ready Tyk OSS API Gateway implementation using OpenAPI Specificatio
 
 This demo showcases a typical production Tyk setup with:
 - **Performance optimizations** for high-scale deployments
+- **GitOps approach** with OAS specifications stored in the repository
 - **Logging** via Redis for collection by Tyk Pump
 - **Metrics collection** using OpenTelemetry with Prometheus endpoints
-- **GitOps approach** with OAS specifications stored in the repository
+- **Circuit breaker** all endpoints should implement a circuit breaker
+- **Caching** Most GET endpoints should cache in REDIS
+- **Rate Limiting** Some endpoints should use rate limiting with REDIS as the storage.
+- **HTTP/2** Requests form the client to TYK and requests from TYK to the upstream should be HTTP/2
+
 
 ## Quick Start
 
@@ -25,7 +30,8 @@ docker compose up
 - **Echo Server**: http://localhost:81
 
 ### Tyk Gateway
-- **API Endpoints**: http://localhost:8080/api/get | http://localhost:8080/api/uuid
+- **WORKING API Endpoints**: http://localhost:8080/api/get | http://localhost:8080/api/uuid
+- **NOT WORKING API Endpoints**: http://localhost:8080/api/echo
 
 ### Admin & Monitoring
 - **Health Check**: http://localhost:5555/health
@@ -40,5 +46,13 @@ docker compose up
 - **Configuration**: OAS-based API definitions for GitOps workflows
 
 ## Known Issues
-
+- **OAS Config not working**: I have a file called api-config.json which I believe should not be necessary but if I remove it, my APIs don't register
+- **Echo Endpoints**: The downstream server http://echo is configured in echo-api.json but it is calling the proxy in api-config.json
 - **Metrics endpoint**: http://localhost:5555/metrics is not working correctly
+- **HTTP/2 not working**: Calling endpoints from Insomnia show that they are using HTTP/1.1
+
+## Not Yet Added
+- **Caching**
+- **Rate limiting**
+- **Circuit breaker**
+- **Logging** 

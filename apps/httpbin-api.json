@@ -1,0 +1,163 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HTTPBin API",
+    "version": "1.0.0",
+    "description": "HTTPBin testing endpoints"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "RequestId": {
+        "name": "request-id",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "Optional request ID that will be returned in the response"
+      }
+    },
+    "securitySchemes": {
+      "JWTAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT token with role 'user' and scope 'api:*'"
+      }
+    },
+    "responses": {
+      "Success": {
+        "description": "Successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "HTTPBin APIs",
+      "description": "HTTPBin testing endpoints"
+    }
+  ],
+  "paths": {
+    "/get": {
+      "get": {
+        "tags": ["HTTPBin APIs"],
+        "summary": "HTTPBin GET request",
+        "description": "Returns request details including headers and query parameters",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "args": {},
+                  "headers": {
+                    "Host": "httpbin.org",
+                    "User-Agent": "curl/7.68.0"
+                  },
+                  "origin": "127.0.0.1",
+                  "url": "http://httpbin.org/get"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/uuid": {
+      "get": {
+        "tags": ["HTTPBin APIs"],
+        "summary": "Generate UUID",
+        "description": "Returns a randomly generated UUID",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "uuid": "efa634ed-e0c3-4e16-9e5a-159c327ce0d0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "x-tyk-api-gateway": {
+    "info": {
+      "name": "HTTPBin API",
+      "id": "httpbin-api"
+    },
+    "upstream": {
+      "url": "http://httpbin"
+    },
+    "server": {
+      "listenPath": {
+        "value": "/api/",
+        "strip": true
+      }
+    }
+  }
+}
