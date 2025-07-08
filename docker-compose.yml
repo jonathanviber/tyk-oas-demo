@@ -1,0 +1,38 @@
+services:
+  tyk-gateway:
+    image: docker.tyk.io/tyk-gateway/tyk-gateway:v5.8.2
+    ports:
+      - 8080:8080
+      - 5555:5555
+    networks:
+      - tyk
+    environment:
+      - TYK_GW_SECRET=foo
+    volumes:
+      - ./tyk.conf:/opt/tyk-gateway/tyk.conf
+      - ./apps:/opt/tyk-gateway/apps
+    depends_on:
+      - tyk-redis
+      - httpbin
+  tyk-redis:
+    image: redis:7.2.9
+    networks:
+      - tyk
+    ports:
+      - 6379:6379
+  httpbin:
+    image: kennethreitz/httpbin
+    networks:
+      - tyk
+    ports:
+      - 80:80
+  echo:
+    image: ealen/echo-server
+    networks:
+      - tyk
+    ports:
+      - 81:80
+
+networks:
+  tyk:
+    driver: bridge
