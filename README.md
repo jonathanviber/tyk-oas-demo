@@ -55,4 +55,5 @@ docker compose up
 - **Caching**
 - **Rate limiting**
 - **Circuit breaker**
-- **Logging** 
+- **Logging**
+- **Performance Optimizations** 
