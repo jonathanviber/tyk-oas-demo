@@ -5,21 +5,110 @@
     "version": "1.0.0",
     "description": "HTTPBin testing endpoints"
   },
+<<<<<<< HEAD
   "paths": {
     "/get": {
       "get": {
         "operationId": "httpbinGet",
+=======
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "RequestId": {
+        "name": "request-id",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "Optional request ID that will be returned in the response"
+      }
+    },
+    "securitySchemes": {
+      "JWTAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT token with role 'user' and scope 'api:*'"
+      }
+    },
+    "responses": {
+      "Success": {
+        "description": "Successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "HTTPBin APIs",
+      "description": "HTTPBin testing endpoints"
+    }
+  ],
+  "paths": {
+    "/get": {
+      "get": {
+>>>>>>> 105e276 (update)
         "tags": ["HTTPBin APIs"],
         "summary": "HTTPBin GET request",
         "description": "Returns request details including headers and query parameters",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/parameters/RequestId"
+=======
+            "$ref": "#/components/parameters/RequestId"
+>>>>>>> 105e276 (update)
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/200",
+=======
+            "$ref": "#/components/responses/Success",
+>>>>>>> 105e276 (update)
             "content": {
               "application/json": {
                 "example": {
@@ -35,28 +124,46 @@
             }
           },
           "400": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/400"
           },
           "500": {
             "$ref": "./common-components.json#/components/responses/500"
+=======
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+>>>>>>> 105e276 (update)
           }
         }
       }
     },
     "/uuid": {
       "get": {
+<<<<<<< HEAD
         "operationId": "generateUuid",
+=======
+>>>>>>> 105e276 (update)
         "tags": ["HTTPBin APIs"],
         "summary": "Generate UUID",
         "description": "Returns a randomly generated UUID",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/parameters/RequestId"
+=======
+            "$ref": "#/components/parameters/RequestId"
+>>>>>>> 105e276 (update)
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/200",
+=======
+            "$ref": "#/components/responses/Success",
+>>>>>>> 105e276 (update)
             "content": {
               "application/json": {
                 "example": {
@@ -66,7 +173,11 @@
             }
           },
           "500": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/500"
+=======
+            "$ref": "#/components/responses/ServerError"
+>>>>>>> 105e276 (update)
           }
         }
       }

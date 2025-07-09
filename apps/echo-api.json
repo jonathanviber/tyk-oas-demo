@@ -5,21 +5,102 @@
     "version": "1.0.0",
     "description": "Echo server endpoints"
   },
+<<<<<<< HEAD
   "paths": {
     "/": {
       "get": {
         "operationId": "echoGet",
+=======
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "RequestId": {
+        "name": "request-id",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "Optional request ID that will be returned in the response"
+      }
+    },
+    "responses": {
+      "Success": {
+        "description": "Successful response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Echo APIs",
+      "description": "Echo server endpoints"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+>>>>>>> 105e276 (update)
         "tags": ["Echo APIs"],
         "summary": "Echo GET request",
         "description": "Echoes back request information",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/parameters/RequestId"
+=======
+            "$ref": "#/components/parameters/RequestId"
+>>>>>>> 105e276 (update)
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/200",
+=======
+            "$ref": "#/components/responses/Success",
+>>>>>>> 105e276 (update)
             "content": {
               "application/json": {
                 "example": {
@@ -35,18 +116,29 @@
             }
           },
           "500": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/500"
+=======
+            "$ref": "#/components/responses/ServerError"
+>>>>>>> 105e276 (update)
           }
         }
       },
       "post": {
+<<<<<<< HEAD
         "operationId": "echoPost",
+=======
+>>>>>>> 105e276 (update)
         "tags": ["Echo APIs"],
         "summary": "Echo POST request",
         "description": "Echoes back POST request data",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/parameters/RequestId"
+=======
+            "$ref": "#/components/parameters/RequestId"
+>>>>>>> 105e276 (update)
           }
         ],
         "requestBody": {
@@ -63,7 +155,11 @@
         },
         "responses": {
           "200": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/200",
+=======
+            "$ref": "#/components/responses/Success",
+>>>>>>> 105e276 (update)
             "content": {
               "application/json": {
                 "example": {
@@ -80,21 +176,35 @@
             }
           },
           "400": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/400"
           },
           "500": {
             "$ref": "./common-components.json#/components/responses/500"
+=======
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+>>>>>>> 105e276 (update)
           }
         }
       },
       "put": {
+<<<<<<< HEAD
         "operationId": "echoPut",
+=======
+>>>>>>> 105e276 (update)
         "tags": ["Echo APIs"],
         "summary": "Echo PUT request",
         "description": "Echoes back PUT request data",
         "parameters": [
           {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/parameters/RequestId"
+=======
+            "$ref": "#/components/parameters/RequestId"
+>>>>>>> 105e276 (update)
           }
         ],
         "requestBody": {
@@ -112,7 +222,11 @@
         },
         "responses": {
           "200": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/200",
+=======
+            "$ref": "#/components/responses/Success",
+>>>>>>> 105e276 (update)
             "content": {
               "application/json": {
                 "example": {
@@ -130,10 +244,17 @@
             }
           },
           "400": {
+<<<<<<< HEAD
             "$ref": "./common-components.json#/components/responses/400"
           },
           "500": {
             "$ref": "./common-components.json#/components/responses/500"
+=======
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+>>>>>>> 105e276 (update)
           }
         }
       }
@@ -149,7 +270,11 @@
     },
     "server": {
       "listenPath": {
+<<<<<<< HEAD
         "value": "/echo/",
+=======
+        "value": "/api/",
+>>>>>>> 105e276 (update)
         "strip": true
       }
     }
